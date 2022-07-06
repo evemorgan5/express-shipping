@@ -1,0 +1,20 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "$id": "http://our.r26evejordan.com/shipmentschema.schema.json",
+    "title": "Shipment",
+    "description": "Places a shipment.",
+    "type": "object",
+    "properties": {
+    "productId": {"type": "integer"},
+    "name": {"type": "string"},
+    "addr": {"type": "string"},
+    "zipcode": {"type": "string"}
+    },
+    "additionalProperties": false,
+    "required": [
+    "productId",
+    "name",
+    "addr",
+    "zipcode"
+    ]
+}
