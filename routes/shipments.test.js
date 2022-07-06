@@ -1,8 +1,11 @@
 "use strict";
+// Need to mock before importing app
+let shipItApi = require("../shipItApi");
+shipItApi.shipProduct = jest.fn();
 
 const request = require("supertest");
 const app = require("../app");
-
+const { SHIPIT_API_KEY } = require("../shipItApi");
 /** POST /
  * - takes in {productId, name, addr, zipcode}
  * Checks post request is successful
@@ -10,15 +13,20 @@ const app = require("../app");
  * - Else: bad request error message
  */
 
+
 describe("POST /", function () {
   test("valid", async function () {
+    shipItApi.shipProduct
+      .mockReturnValue(1);
+
+
     const resp = await request(app).post("/shipments").send({
       productId: 1000,
       name: "Test Tester",
       addr: "100 Test St",
       zipcode: "12345-6789",
     });
-    expect(resp.body).toEqual({ shipped: expect.any(Number) });
+    expect(resp.body).toEqual({ shipped: 1 });
   });
   test("invalid input", async function () {
     const resp = await request(app).post("/shipments").send({

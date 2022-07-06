@@ -11,7 +11,7 @@ const axios = require("axios");
  * Returns shipId from shipit.
  */
 
-async function shipProduct({ productId, name, addr, zip }) {
+async function shipProduct({ productId, name, addr, zipcode }) {
   console.warn("Called our real shipProduct function");
 
   const resp = await axios({
@@ -21,7 +21,7 @@ async function shipProduct({ productId, name, addr, zip }) {
       itemId: productId,
       name: name,
       addr: addr,
-      zip: zip,
+      zipcode: zipcode,
       key: SHIPIT_API_KEY
     },
   });
@@ -29,4 +29,4 @@ async function shipProduct({ productId, name, addr, zip }) {
   return resp.data.receipt.shipId;
 }
 
-module.exports = { shipProduct };
+module.exports = { shipProduct, SHIPIT_SHIP_URL, SHIPIT_API_KEY };
